@@ -1,13 +1,17 @@
 # WebVR-project
 a little experiment with WebVR and Django
 
-#initial settings
-1. You must install Django(of course python too) in your Desktop
-2. 
+<h2>Initial Installation</h2>
+<ul>
+  <li>You must install Django(of course python too) in your Desktop : $ pip install Django</li>
+  <li>You must install Django-colorful for color object : $ pip install django-colorful</li>
+</ul>
 
-#runserver
-1. open cmd in your desktop
-2. go to the directory where your 'manage.py' is
-3. input 'manage.py runserver'
-4. open your browser and browse "http://127.0.0.1:8000/"</br>
-//if there is a error by the port, try to change your port like 'manage.py runserver 8080'
+<h2>Running Django Server</h2>
+<ul>
+  <li>open cmd in your desktop</li>
+  <li>go to the directory where your 'manage.py' located</li>
+  <li>input 'manage.py runserver'</li>
+  <li>open your browser and browse "http://127.0.0.1:8000/"</li>
+  <p>//if there is a error by the port, try to change your port like 'manage.py runserver 8080'</p>
+</ul>
