@@ -2,7 +2,7 @@
 a little experiment with WebVR and Django
 
 #initial settings
-1. You must install Django in your Desktop
+1. You must install Django(of course python too) in your Desktop
 2. 
 
 #runserver
