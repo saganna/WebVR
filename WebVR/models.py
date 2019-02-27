@@ -49,18 +49,12 @@ class Basemodel(shadow, rotation, position, scale):
     src = TextField(default="")#change to url
     visible = BooleanField(default=False)
 
-    #ani = ForeignKey(animation, on_delete=CASCADE)
-    #pos = ForeignKey(position, on_delete=CASCADE)
-    #rot = ForeignKey(rotation, on_delete=CASCADE)
-    #sca = ForeignKey(scale, on_delete=CASCADE)
-    #sha = ForeignKey(shadow, on_delete=CASCADE)
-
     class Meta:
         abstract=True
 
 
 #real object Models
-class abox(Basemodel):
+class a_box(Basemodel):
     depth = FloatField(default=1)
     height = FloatField(default=1)
     width = FloatField(default=1)
@@ -68,7 +62,7 @@ class abox(Basemodel):
     def __str__(self):
         return self.name
 
-class acircle(Basemodel):
+class a_circle(Basemodel):
     radius = FloatField(default=1)
     height = FloatField(default=256)
     width = FloatField(default=512)
@@ -77,3 +71,33 @@ class acircle(Basemodel):
 
     def __str__(self):
         return self.name
+
+class a_cone(Basemodel):
+    radius_bottom = FloatField(default=1)
+    radius_top = FloatField(default=0.8)
+    theta_length = FloatField(default=360)
+    theta_start = FloatField(default=0)
+    width = FloatField(default=512)
+    height = FloatField(default=256)
+
+    def __str__(self):
+        return self.name
+
+class a_cylinder(Basemodel):
+    radius_bottom = FloatField(default=1)
+    radius_top = FloatField(default=0.8)
+    theta_length = FloatField(default=360)
+    theta_start = FloatField(default=0)
+    width = FloatField(default=512)
+    height = FloatField(default=256)
+    open_ended = BooleanField(default=False)
+
+class a_dodecahedron(Basemodel):
+    pass
+
+class a_sphere(Basemodel):
+    height = FloatField(256)
+    radius = FloatField(1)
+    theta_length = FloatField(default=180)
+    theta_start = FloatField(default=0)
+    width = FloatField(default=512)
