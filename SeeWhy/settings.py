@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'WebVR',
+    'django_mysql',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "WebVR",
+        'OPTIONS':{
+            'charset':'utf8mb4',
+        },
         'USER' : 'root',
         'PASSWORD' : 'hero6724',
         'HOST' : 'localhost',
@@ -105,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

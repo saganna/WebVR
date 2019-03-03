@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name='viewport'content="width=device-width", initial-scale="1">
-    <title>Home</title>
-    <link rel="stylesheet", href="css/bootstrap.css">
-  </head>
-  <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-    <div class="container">
-      <div class="jumbotron">
-        <h1 class="text-center">Simple WebVR</h1>
-        <p class="text-center">This is a Website that you can experience quick WebVR</p>
-        <p class="text-center"><a class="btn btn-primary btn-lg" href='myproject.html' role="button">Create som VR</a></p>
-      </div>
-    </div>
-</html>
+{% extends "WebVR/base.html" %}
+
+{% block title %}
+Welcome to Home
+{% endblock %}
+
+{% block content %}
+<h1>This is Home</h1>
+{% endblock %}
+{%block another_content %}
+<p class="text-center">testing</p>
+{% endblock %}

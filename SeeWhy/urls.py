@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from WebVR.views import *
+
 urlpatterns = [
+    path('', Home_view, name='home'),
     path('admin/', admin.site.urls),
     path('WebVR/', include('WebVR.urls')),
 ]
