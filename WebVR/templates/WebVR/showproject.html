@@ -1,9 +1,129 @@
-{% extends "WebVR/base.html" %}
+{% extends "WebVR/a_base.html" %}
 
 {% block title %}
-show projects
+{{name}}
 {% endblock %}
 
-{% block content %}
-{{object.pos_x}}
+{% block a-box %}
+  {% for box in a_box %}
+    {% if box.visible %}
+      <a-box
+        color="{{box.color}}"
+        position="{{box.position}}"
+        rotation="{{box.rotation}}"
+        scale="{{box.scale}}"
+        width="{{box.width}}"
+        height="{{box.height}}"
+        depth="{{box.depth}}"
+        shadow="{{box.shadow}}"
+
+      ></a-box>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block a-cicle %}
+  {% for circle in a_circle %}
+    {% if circle.visible %}
+      <a-circle
+        color="{{circle.color}}"
+        position="{{circle.position}}"
+        rotation="{{circle.rotation}}"
+        scale="{{circle.scale}}"
+        width="{{circle.width}}"
+        height="{{circle.height}}"
+        radius="{{circle.radius}}"
+        shadow="{{circle.shadow}}"
+        theta-length="{{circle.theta_length}}"
+        theta-start="{{circle.theta_start}}"
+      ></a-circle>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block a-cone %}
+  {% for cone in a_cone %}
+    {% if cone.visible %}
+      <a-cone
+        color="{{cone.color}}"
+        position="{{cone.position}}"
+        rotation="{{cone.rotation}}"
+        scale="{{cone.scale}}"
+        width="{{cone.width}}"
+        height="{{cone.height}}"
+        radius-bottom="{{cone.radius_bottom}}"
+        radius-top="{{cone.radius_top}}"
+        shadow="{{cone.shadow}}"
+        theta-length="{{circle.theta_length}}"
+        theta-start="{{circle.theta_start}}"
+      ></a-cone>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block a-cylinder %}
+  {% for cylinder in a_cylinder %}
+    {% if cylinder.visible %}
+      <a-cylinder
+        color="{{cylinder.color}}"
+        position="{{cylinder.position}}"
+        rotation="{{cylinder.rotation}}"
+        scale="{{cylinder.scale}}"
+        width="{{cylinder.width}}"
+        height="{{cylinder.height}}"
+        shadow="{{cylinder.shadow}}"
+        open-ended="{{cylinder.open_ended}}"
+        theta-length="{{cylinder.theta_length}}"
+        theta-start="{{cylinder.theta_start}}"
+      ></a-cylinder>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block a-dodecahedron %}
+  {% for dodecahedron in a_dodecahedron %}
+    {% if dodecahedron.visible %}
+      <a-dodecahedron
+        color="{{dodecahedron.color}}"
+        position="{{dodecahedron.position}}"
+        rotation="{{dodecahedron.rotation}}"
+        scale="{{dodecahedron.scale}}"
+        radius="{{dodecahedron.radius}}"
+        shadow="{{dodecahedron.shadow}}"
+      ></a-dodecahedron>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block a-sphere %}
+  {% for sphere in a_sphere %}
+    {% if sphere.visible %}
+      <a-sphere
+        color="{{sphere.color}}"
+        position="{{sphere.position}}"
+        rotation="{{sphere.rotation}}"
+        scale="{{sphere.scale}}"
+        width="{{sphere.width}}"
+        height="{{sphere.height}}"
+        shadow="{{sphere.shadow}}"
+        theta-length="{{sphere.theta_length}}"
+        theta-start="{{sphere.theta_start}}"
+        radius="{{sphere.radius}}"
+      ></a-sphere>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block a-sky %}
+  {% for sky in a_sky %}
+    {% if sky.visible %}
+      <a-sky
+        color="{{sky.color}}"
+        radius="{{sky.radius}}"
+        opacity="{{sky.opacity}}"
+        theta-length="{{sky.theta_length}}"
+        theta-start="{{sky.theta_start}}"
+      ></a-sky>
+    {% endif %}
+  {% endfor %}
 {% endblock %}

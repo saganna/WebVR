@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <title>WebVR Playground-{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <a-scene>
+      {% block a-box %}
+      {% endblock %}
+
+      {% block a-circle %}
+      {% endblock %}
+
+      {% block a-cone %}
+      {% endblock %}
+
+      {% block a-cylinder %}
+      {% endblock %}
+
+      {% block a-dodecahedron %}
+      {% endblock %}
+
+      {% block a-sphere %}
+      {% endblock %}
+
+      {% block a-sky %}
+      {% endblock %}
+    </a-scene>
+  </body>
+</html>

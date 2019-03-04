@@ -16,7 +16,7 @@ class position(Basic):#position class
 
     pos_x=DecimalField(default=0, max_digits=5, decimal_places=2)
     pos_y=DecimalField(default=0, max_digits=5, decimal_places=2)
-    pos_z=DecimalField(default=0, max_digits=5, decimal_places=2)
+    pos_z=DecimalField(default=-4, max_digits=5, decimal_places=2)
 
     def pos(self):
         return "{} {} {}".format(self.pos_x, self.pos_y, self.pos_z)
@@ -50,8 +50,7 @@ class shadow(Basic):#shadow class
 class Basemodel(shadow, rotation, position, scale):
     name = CharField(max_length=50)
     color = RGBColorField(default='#FF0000')
-    src = TextField(default="")#change to url
-    visible = BooleanField(default=False)
+    visible = BooleanField(default=True)
 
     class Meta:
         abstract=True
@@ -104,8 +103,7 @@ class a_cone(Basemodel):
 class a_cylinder(Basemodel):
     project = ForeignKey(Project, on_delete=CASCADE)
 
-    radius_bottom = DecimalField(default=1, max_digits=5, decimal_places=2)
-    radius_top = DecimalField(default=0.8, max_digits=5, decimal_places=2)
+    radius = DecimalField(default=1, max_digits=5, decimal_places=2)
     theta_length = DecimalField(default=360, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
     width = DecimalField(default=512, max_digits=5, decimal_places=2)
@@ -118,6 +116,8 @@ class a_cylinder(Basemodel):
 class a_dodecahedron(Basemodel):
     project = ForeignKey(Project, on_delete=CASCADE)
 
+    radius = DecimalField(default=1, max_digits=5, decimal_places=2)
+
     pass
 
 class a_sphere(Basemodel):
@@ -128,6 +128,22 @@ class a_sphere(Basemodel):
     theta_length = DecimalField(default=180, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
     width = DecimalField(default=512, max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+class a_sky(Basic):
+    sky_basic = OneToOneField(Basic, parent_link=True, on_delete=CASCADE)
+    project = ForeignKey(Project, on_delete=CASCADE)
+
+    name = CharField(max_length=50)
+    color = RGBColorField(default='#6EBAA7')
+    visible = BooleanField(default=True)
+
+    radius = DecimalField(default=5000, max_digits=5, decimal_places=2)
+    opacity = DecimalField(default=1, max_digits=5, decimal_places=2)
+    theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
+    theta_length = DecimalField(default=180, max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.name
