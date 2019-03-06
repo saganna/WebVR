@@ -5,17 +5,21 @@ from .models import *
 from .forms import *
 
 # Create your views here.
-def index(request):
-    return HttpResponse("hihi")
-
-def Home_view(request):
+def Home(request):
     template='WebVR/Home.html'
-    return render(request, template, {})
+    content={}
+    obj = Project.objects.all()
+    for i in range(6):
+        content["{}".format(i+1)]=obj[i]
+    return render(request, template, content)
 
 def myproject(request):
-    project_list = project.objects
-    output ='\n'.join(p.name for p in project_list)
-    return HttpResponse(output)
+    template='WebVR/myproject.html'
+    project_list = Project.objects
+    output = {
+        'object' : project_list
+    }
+    return render(request, template, output)
 
 def CreateVR_view(request):
     form = ProjectCreateForm(request.POST or None)

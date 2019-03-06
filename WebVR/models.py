@@ -107,7 +107,7 @@ class a_cylinder(Basemodel):
     theta_length = DecimalField(default=360, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
     width = DecimalField(default=512, max_digits=5, decimal_places=2)
-    height = DecimalField(default=256, max_digits=5, decimal_places=2)
+    height = DecimalField(default=1, max_digits=5, decimal_places=2)
     open_ended = BooleanField(default=False)
 
     def __str__(self):
@@ -140,7 +140,7 @@ class a_sky(Basic):
     color = RGBColorField(default='#6EBAA7')
     visible = BooleanField(default=True)
 
-    radius = DecimalField(default=5000, max_digits=5, decimal_places=2)
+    radius = DecimalField(default=5000, max_digits=10, decimal_places=5)
     opacity = DecimalField(default=1, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
     theta_length = DecimalField(default=180, max_digits=5, decimal_places=2)
