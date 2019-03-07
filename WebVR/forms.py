@@ -8,5 +8,6 @@ class ProjectCreateForm(forms.ModelForm):
         fields = [
             'name',
             'description',
-            'changed_date',
+            'created_date',
+            'updated_date',
         ]

@@ -1,5 +1,8 @@
 from django.db.models import *
 from colorful.fields import RGBColorField
+from django.utils import timezone
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -55,14 +58,27 @@ class Basemodel(shadow, rotation, position, scale):
     class Meta:
         abstract=True
 
+class AutoDateTimeField(DateTimeField):
+    def pre_save(self, model_instance, add):
+        return timezone.now()
+
 #project Model
-class Project(Model):
+class UserDATA(Model):
+    creator = ForeignKey(User, editable=False, on_delete=CASCADE)
+    class meta:
+        abstract = True
+
+class Project(UserDATA):
     name = CharField(max_length=200, blank=False)
     description = TextField()
-    changed_date = DateField()
+    created_date = DateField(default=timezone.now)
+    updated_date = AutoDateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('show project', kwargs={'name' : self.name})
 
 #real object Models
 class a_box(Basemodel):
@@ -128,6 +144,25 @@ class a_sphere(Basemodel):
     theta_length = DecimalField(default=180, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
     width = DecimalField(default=512, max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+class a_icosahedron(Basemodel):
+    project = ForeignKey(Project, on_delete=CASCADE)
+
+    height = DecimalField(default=256, max_digits=5, decimal_places=2)
+    radius = DecimalField(default=1, max_digits=5, decimal_places=2)
+    width = DecimalField(default=512, max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+class a_plane(Basemodel):
+    project = ForeignKey(Project, on_delete=CASCADE)
+
+    height = DecimalField(default=1, max_digits=5, decimal_places=2)
+    width = DecimalField(default=1, max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.name

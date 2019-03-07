@@ -1,25 +1,59 @@
 from django.shortcuts import render
+from django.views.generic import *
 
 from django.http import HttpResponse
+from extra_views import CreateWithInlinesView, InlineFormSet
 from .models import *
 from .forms import *
 
 # Create your views here.
 def Home(request):
-    template='WebVR/Home.html'
-    content={}
-    obj = Project.objects.all()
-    for i in range(6):
-        content["{}".format(i+1)]=obj[i]
+    template='WebVR/projects.html'
+    content={'projects' : projects}
     return render(request, template, content)
 
-def myproject(request):
-    template='WebVR/myproject.html'
-    project_list = Project.objects
-    output = {
-        'object' : project_list
-    }
-    return render(request, template, output)
+class AboxInline(InlineFormSet):
+    model = a_box
+
+class AcircleInline(InlineFormSet):
+    model = a_circle
+
+class AconeInline(InlineFormSet):
+    model = a_cone
+
+class AcylinderInline(InlineFormSet):
+    model = a_cylinder
+
+class AdodecahedronInline(InlineFormSet):
+    model = a_dodecahedron
+
+class AsphereInline(InlineFormSet):
+    model = a_sphere
+
+class AskyInline(InlineFormSet):
+    model = a_sky
+
+class AplaneInline(InlineFormSet):
+    model = a_plane
+
+class AicosahedronInline(InlineFormSet):
+    model = a_icosahedron
+
+class ProjectListView(ListView):
+    model = Project
+    template_name = 'WebVR/projects.html'
+    context_object_name = 'projects'
+    ordering = ['-updated_date']
+
+class ProjectCreateView(CreateWithInlinesView):
+    model = Project
+    template_name='WebVR/createVR.html'
+    fields = ['name', 'description']
+    inlines = [AboxInline, AcircleInline, AconeInline, AcylinderInline, AdodecahedronInline, AsphereInline, AskyInline, AplaneInline, AicosahedronInline, ]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 def CreateVR_view(request):
     form = ProjectCreateForm(request.POST or None)
@@ -39,7 +73,8 @@ def showProject_view(request, id):
     context={
         'name' : obj.name,
         'description' : obj.description,
-        'changed_date' : obj.changed_date
+        'created-date' : obj.created_date,
+        'updated-date' : obj.updated_date,
     }
 
     #adding abox
