@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.views.generic import *
 
 from django.http import HttpResponse
-from extra_views import CreateWithInlinesView, InlineFormSet
+from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.db import transaction
 from .models import *
 from .forms import *
 
@@ -12,32 +14,9 @@ def Home(request):
     content={'projects' : projects}
     return render(request, template, content)
 
-class AboxInline(InlineFormSet):
+class AboxInline(ListView):
     model = a_box
-
-class AcircleInline(InlineFormSet):
-    model = a_circle
-
-class AconeInline(InlineFormSet):
-    model = a_cone
-
-class AcylinderInline(InlineFormSet):
-    model = a_cylinder
-
-class AdodecahedronInline(InlineFormSet):
-    model = a_dodecahedron
-
-class AsphereInline(InlineFormSet):
-    model = a_sphere
-
-class AskyInline(InlineFormSet):
-    model = a_sky
-
-class AplaneInline(InlineFormSet):
-    model = a_plane
-
-class AicosahedronInline(InlineFormSet):
-    model = a_icosahedron
+    exclude=[]
 
 class ProjectListView(ListView):
     model = Project
@@ -45,15 +24,35 @@ class ProjectListView(ListView):
     context_object_name = 'projects'
     ordering = ['-updated_date']
 
-class ProjectCreateView(CreateWithInlinesView):
+class ProjectCreateView(CreateView):
     model = Project
     template_name='WebVR/createVR.html'
-    fields = ['name', 'description']
-    inlines = [AboxInline, AcircleInline, AconeInline, AcylinderInline, AdodecahedronInline, AsphereInline, AskyInline, AplaneInline, AicosahedronInline, ]
+    success_url = reverse_lazy('project-home')
+    fields=['name', 'description']
+
+    def get_context_data(self, **kwargs):
+        data = super(ProjectCreateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data['abox'] = AboxFormSet(self.request.POST, instance=self.object)
+            data['acircle'] = AcircleFormSet(self.request.POST, instance=self.object)
+            data['acone'] = AconeFormSet(self.request.POST, instance=self.object)
+        else:
+            data['abox'] = AboxFormSet(instance=self.object)
+            data['acircle'] = AcircleFormSet(instance=self.object)
+            data['acone'] = AconeFormSet(instance=self.object)
+        return data
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+        context = self.get_context_data()
+        name = context['titles']
+        with transaction.atomic():
+            form.instance.creator = self.request.user
+            self.object = form.save()
+            if name.is_valid():
+                name.instance = self.object
+                name.save()
+        return super(ProjectCreateView, self).form_valid(form)
+
 
 def CreateVR_view(request):
     form = ProjectCreateForm(request.POST or None)
