@@ -44,14 +44,15 @@ class ProjectCreateView(CreateView):
 
     def form_valid(self, form):
         context = self.get_context_data()
-        name = context['titles']
+        print(context)
+        name = context['abox']
         with transaction.atomic():
             form.instance.creator = self.request.user
             self.object = form.save()
             if name.is_valid():
                 name.instance = self.object
                 name.save()
-        return super(ProjectCreateView, self).form_valid(form)
+        return super(ProjectCreateView, self).form_invalid(form)
 
 
 def CreateVR_view(request):

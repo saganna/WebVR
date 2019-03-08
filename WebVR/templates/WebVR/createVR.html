@@ -111,7 +111,6 @@
                         {{ hidden }}
                       {% endfor %}
                     {% endif %}
-                    {{ field.errors.as_ul }}
                     {{ field|as_crispy_field }}
                   </td>
                 {% endfor %}
@@ -209,21 +208,21 @@
     <script type="text/javascript">
         $('.formset_row_box-{{ formset.prefix }}').formset({
             addText: 'add another',
-            deleteText: 'remove',
+            deleteText: 'delete',
             prefix: '{{ formset.prefix }}'
         });
     </script>
     <script type="text/javascript">
         $('.formset_row_circle-{{ formset.prefix }}').formset({
             addText: 'add another',
-            deleteText: 'remove',
+            deleteText: 'delete',
             prefix: '{{ formset.prefix }}'
         });
     </script>
     <script type="text/javascript">
         $('.formset_row_cone-{{ formset.prefix }}').formset({
             addText: 'add another',
-            deleteText: 'remove',
+            deleteText: 'delete',
             prefix: '{{ formset.prefix }}'
         });
     </script>
