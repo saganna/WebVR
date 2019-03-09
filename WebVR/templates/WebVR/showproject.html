@@ -20,9 +20,9 @@
       ></a-box>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-box %}
 
-{% block a-cicle %}
+{% block a-circle %}
   {% for circle in a_circle %}
     {% if circle.visible %}
       <a-circle
@@ -39,7 +39,7 @@
       ></a-circle>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-circle %}
 
 {% block a-cone %}
   {% for cone in a_cone %}
@@ -59,7 +59,7 @@
       ></a-cone>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-cone %}
 
 {% block a-cylinder %}
   {% for cylinder in a_cylinder %}
@@ -78,7 +78,7 @@
       ></a-cylinder>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-cylinder %}
 
 {% block a-dodecahedron %}
   {% for dodecahedron in a_dodecahedron %}
@@ -93,7 +93,7 @@
       ></a-dodecahedron>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-dodecahedron %}
 
 {% block a-sphere %}
   {% for sphere in a_sphere %}
@@ -112,7 +112,7 @@
       ></a-sphere>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-sphere %}
 
 {% block a-sky %}
   {% for sky in a_sky %}
@@ -126,4 +126,29 @@
       ></a-sky>
     {% endif %}
   {% endfor %}
-{% endblock %}
+{% endblock a-sky %}
+
+{% block a-plane %}
+  {% for plane in a_plane %}
+    {% if plane.visible %}
+      <a-plane
+        color="{{plane.color}}"
+        height="{{plane.height}}"
+        width="{{plane.width}}"
+      ></a-plane>
+    {% endif %}
+  {% endfor %}
+{% endblock a-plane %}
+
+{% block a-icosahedron %}
+  {% for icosahedron in a_icosahedron %}
+    {% if icosahedron.visible %}
+      <a-icosahedron
+        color="{{icosahedron.color}}"
+        radius="{{icosahedron.radius}}"
+        height="{{icosahedron.height}}"
+        width="{{icosahedron.width}}"
+      ></a-icosahedron>
+    {% endif %}
+  {% endfor %}
+{% endblock a-icosahedron %}

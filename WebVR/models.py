@@ -51,7 +51,7 @@ class Project(UserDATA):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('show project', kwargs={'name' : self.name})
+        return reverse('show project', kwargs={'pk' : self.pk})
 
 #real object Models
 class a_box(Basemodel):

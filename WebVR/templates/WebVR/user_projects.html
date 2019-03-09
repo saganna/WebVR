@@ -9,7 +9,7 @@
   <meta name="description" content="WebVR">
   <meta name="author" content="SeeWhy">
 
-  <title>{% block title %}{% endblock title %}</title>
+  <title>Projects by {{ view.kwargs.username }}</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -56,6 +56,7 @@
 
   <!-- About Section -->
   <section class="bg-primary text-white mb-0" id="about">
+    <h1 class="mt-3 text-center">Projects by {{ view.kwargs.username }} ({{page_obj.paginator.count}})</h1>
     <div class="container" style="padding : 50px 15px 20px 15px">
       {% for project in projects %}
       <h2 class="text-center text-uppercase text-white">{{project.name}}</h2>
@@ -66,9 +67,9 @@
         </div>
         <div class="col-lg-4 mr-auto">
           <p class="lead">
-            Creator : </br>
+            Creator :
             <a class="mr-2 text-white" href="{% url 'user-projects' project.creator.username %}">
-            {{project.creator}}</br>
+            {{project.creator}}</br></br>
             </a>
             Created_date : </br>
             {{project.created_date}}</br>
