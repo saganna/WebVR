@@ -42,7 +42,7 @@ class UserDATA(Model):
         abstract = True
 
 class Project(UserDATA):
-    name = CharField(max_length=200, blank=False)
+    name = CharField(max_length=200, blank=False, unique=True)
     description = TextField()
     created_date = DateField(default=timezone.now)
     updated_date = AutoDateTimeField(default=timezone.now)

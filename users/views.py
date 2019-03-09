@@ -40,8 +40,8 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
-messages.debug
-messages.info
-messages.success
-messages.debug
-messages.debug
+#messages.debug
+#messages.info
+#messages.success
+#messages.debug
+#messages.debug

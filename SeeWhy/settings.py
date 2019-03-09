@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'WebVR',
     'django_mysql',
-    'users',
+    'users.apps.UsersConfig',
     'basic',
     'crispy_forms',
     'extra_views',

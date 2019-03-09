@@ -54,7 +54,11 @@
     <div class="">
       {% if user.is_authenticated %}
         <a href="{% url 'profile' %}">
+          {% if user.profile %}
           <img src="{{user.profile.image.url}}" class="rounded-circle artivle-img">
+          {% else %}
+          Profile
+          {%endif%}
         </a>
         <a href="{% url 'logout' %}">
           Log out

@@ -10,13 +10,9 @@ from .forms import *
 
 # Create your views here.
 def Home(request):
-    template='WebVR/projects.html'
-    content={'projects' : projects}
+    template='WebVR/Home.html'
+    content={'projects' : Project}
     return render(request, template, content)
-
-class AboxInline(ListView):
-    model = a_box
-    exclude=[]
 
 class ProjectListView(ListView):
     model = Project
