@@ -6,6 +6,9 @@ a little experiment with WebVR and Django
   <li>You must install Django(of course python too) in your Desktop : $ pip install Django</li>
   <li>You must install <a href="https://pypi.org/project/django-colorful/">Django-colorful</a> for color object : $ pip install django-colorful</li>
   <li>You must install mysqlclient : $ pip install mysqlclient</li>
+  <li>You must install django-crispy for template problem : $ pip install django-crispy</li>
+  <li>You must install Pillow for Image Field : $ pip install Pillow</li>
+  <li>You must install django-extra-views for create, update view : $ pip install django-extra-views
 </ol>
 
 <h2>Running Django Server</h2>
