@@ -11,6 +11,10 @@ a little experiment with WebVR and Django
   <li>You must install django-extra-views for create, update view : $ pip install django-extra-views
 </ol>
 
+<h2>DataBase Settings</h2>
+<ol>
+  <p>In this project, I used a database called MySQL with Bitnami XAMP. So, for copping the settings.py, you have to install MySQL DataBase and Set your DataBase ID and PW in Settings.py. Or, you can change the settings  for SQLite in Settings.py</p>
+
 <h2>Running Django Server</h2>
 <ol>
   <li>open cmd in your desktop</li>
