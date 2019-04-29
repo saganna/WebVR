@@ -68,8 +68,6 @@ class a_circle(Basemodel):
     project = ForeignKey(Project, on_delete=CASCADE)
 
     radius = DecimalField(default=1, max_digits=5, decimal_places=2)
-    height = DecimalField(default=256, max_digits=5, decimal_places=2)
-    width = DecimalField(default=512, max_digits=5, decimal_places=2)
     theta_length = DecimalField(default=360, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
 
@@ -83,8 +81,7 @@ class a_cone(Basemodel):
     radius_top = DecimalField(default=0.8, max_digits=5, decimal_places=2)
     theta_length = DecimalField(default=360, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
-    width = DecimalField(default=512, max_digits=5, decimal_places=2)
-    height = DecimalField(default=256, max_digits=5, decimal_places=2)
+    height = DecimalField(default=1, max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.name
@@ -95,7 +92,6 @@ class a_cylinder(Basemodel):
     radius = DecimalField(default=1, max_digits=5, decimal_places=2)
     theta_length = DecimalField(default=360, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
-    width = DecimalField(default=512, max_digits=5, decimal_places=2)
     height = DecimalField(default=1, max_digits=5, decimal_places=2)
     open_ended = BooleanField(default=False)
 
@@ -106,17 +102,14 @@ class a_dodecahedron(Basemodel):
     project = ForeignKey(Project, on_delete=CASCADE)
 
     radius = DecimalField(default=1, max_digits=5, decimal_places=2)
-
     pass
 
 class a_sphere(Basemodel):
     project = ForeignKey(Project, on_delete=CASCADE)
 
-    height = DecimalField(default=256, max_digits=5, decimal_places=2)
     radius = DecimalField(default=1, max_digits=5, decimal_places=2)
     theta_length = DecimalField(default=180, max_digits=5, decimal_places=2)
     theta_start = DecimalField(default=0, max_digits=5, decimal_places=2)
-    width = DecimalField(default=512, max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.name
@@ -124,9 +117,7 @@ class a_sphere(Basemodel):
 class a_icosahedron(Basemodel):
     project = ForeignKey(Project, on_delete=CASCADE)
 
-    height = DecimalField(default=256, max_digits=5, decimal_places=2)
     radius = DecimalField(default=1, max_digits=5, decimal_places=2)
-    width = DecimalField(default=512, max_digits=5, decimal_places=2)
 
     def __str__(self):
         return self.name

@@ -66,9 +66,9 @@
         </div>
         <div class="col-lg-4 mr-auto">
           <p class="lead">
-            Creator : </br>
+            Creator :
             <a class="mr-2 text-white" href="{% url 'user-projects' project.creator.username %}">
-            {{project.creator}}</br>
+            {{project.creator}}</br></br>
             </a>
             Created_date : </br>
             {{project.created_date}}</br>
@@ -84,6 +84,7 @@
       </div>
       {% endif %}
       {% endfor %}
+      <div class="text-center">
       {% if is_paginated %}
 
         {% if page_obj.has_previous %}
@@ -106,6 +107,7 @@
 
 
       {% endif %}
+      </div>
       <div class="text-center mt-4">
         <a class="btn btn-xl btn-outline-light" href="{% url 'createVR' %}">
           Create WebVR

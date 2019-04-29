@@ -15,6 +15,13 @@ def Home(request):
     content={'projects' : Project}
     return render(request, template, content)
 
+def CreateProject(request):
+    template='WebVR/test1.html'
+    if request.method=='POST':
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+    pass
+
 class ProjectListView(ListView):
     model = Project
     template_name = 'WebVR/projects.html'
@@ -37,6 +44,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     template_name='WebVR/createVR.html'
     fields=['name', 'description']
+
 
     def get_context_data(self, **kwargs):
         data = super(ProjectCreateView, self).get_context_data(**kwargs)
@@ -144,7 +152,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             form.instance.creator = self.request.user
             self.object = form.save()
             if abox.is_valid() and acircle.is_valid() and acone.is_valid() and acylinder.is_valid() and adodecahedron.is_valid() and asphere.is_valid() and aicosahedron.is_valid() and aplane.is_valid() and asky.is_valid():
-                
+
                 abox.instance = self.object
                 abox.save()
                 acircle.instance = self.object
@@ -174,7 +182,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Project
     success_url = 'WebVR/projects/'
-    
+
     def test_func(self):
         project = self.get_object()
         if self.request.user == project.creator:
@@ -301,7 +309,7 @@ def showproject_view(request, pk):
         temp['shadow']="cast : {} receive : {}".format(t.cast, t.receive)
         asphere.append(temp)
     context['a_sphere']=asphere
-    
+
     #adding aicosahedron
     aicosahedron=[]
     for i in range(obj.a_icosahedron_set.count()):
@@ -334,7 +342,7 @@ def showproject_view(request, pk):
         temp['opacity']=t.opacity
         asky.append(temp)
     context['a_sky']=asky
-    
+
     #adding aplane
     aplane=[]
     for i in range(obj.a_plane_set.count()):
