@@ -2,500 +2,469 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  	<title>Create VR</title>
-  	<meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <title>Create VR</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--===============================================================================================-->
-  	<link rel="icon" type="image/png" href="{% static 'users/images/icons/favicon.ico' %}"/>
+  <link rel="icon" type="image/png" href="{% static 'users/images/icons/favicon.ico' %}" />
   <!--===============================================================================================-->
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!--===============================================================================================-->
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
   <!--===============================================================================================-->
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/animate/animate.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/animate/animate.css'%}">
   <!--===============================================================================================-->
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/css-hamburgers/hamburgers.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/css-hamburgers/hamburgers.min.css' %}">
   <!--===============================================================================================-->
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/vendor/select2/select2.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/vendor/select2/select2.min.css' %}">
   <!--===============================================================================================-->
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/css/util.css' %}">
-  	<link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/util.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'users/css/main.css' %}">
   <!--===============================================================================================-->
 
   <style media="screen">
     table {
-            margin: auto;
-            border-collapse: collapse;
-            overflow-x: auto;
-            display: block;
-            width: 2000px;
-            max-width: 100%;
-            box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
-          }
+      margin: auto;
+      border-collapse: collapse;
+      overflow-x: auto;
+      display: block;
+      width: 2000px;
+      max-width: 100%;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+    }
 
-          tbody{
-            width : 100%;
-            display : table;
-          }
+    tbody {
+      width: 100%;
+      display: table;
+    }
 
-          td, th {
-            border: solid rgb(200, 200, 200) 1px;
-            padding: .5rem;
-          }
+    td,
+    th {
+      border: solid rgb(200, 200, 200) 1px;
+      padding: .5rem;
+    }
 
-          th {
-            text-align: left;
-            background-color: rgb(190, 220, 250);
-            text-transform: uppercase;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-            border-top: none;
-          }
+    th {
+      text-align: left;
+      background-color: rgb(190, 220, 250);
+      text-transform: uppercase;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-top: none;
+    }
 
-          td {
-            white-space: nowrap;
-            border-bottom: none;
-          }
+    td {
+      white-space: nowrap;
+      border-bottom: none;
+    }
 
-          td:first-of-type, th:first-of-type {
-            border-left: none;
-          }
+    td:first-of-type,
+    th:first-of-type {
+      border-left: none;
+    }
 
-          td:last-of-type, th:last-of-type {
-            border-right: none;
-          }
+    td:last-of-type,
+    th:last-of-type {
+      border-right: none;
+    }
 
-          #create_form{
-            width : 100%;
-          }
+    #create_form {
+      width: 100%;
+    }
 
-          #create_title{
-            font-size : 50px;
-          }
+    #create_title {
+      font-size: 50px;
+    }
   </style>
-  </head>
-  <body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
 
-  	<div class="limiter">
-  		<div class="container-login100">
-  			<div class="text-center wrap-login100" style="padding-top : 50px;" >
+<body>
 
-          <form id="create_form" method="post">
-              {% csrf_token %}
-              <span class="login100-form-title mt-0" id="create_title">
-                  CREATE VR PROJECT
-              </span>
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen>
-                </iframe>
-              </div>
-              <div class="text-center">
-                <div class="btn-group mt-2" role="group">
-                  <button type="button" class="btn btn-outline-primary">미리보기</button>
-                  <button type="button" class="btn btn-outline-primary">저장</button>
-                  <button type="button" class="btn btn-outline-primary">저장 후 닫기</button>
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="text-center wrap-login100" style="padding-top : 50px;">
+
+        <form id="create_form" method="post">
+          {% csrf_token %}
+          <span class="login100-form-title mt-0" id="create_title">
+            CREATE VR PROJECT
+          </span>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen>
+            </iframe>
+          </div>
+          <div class="text-center">
+            <div class="btn-group mt-2" role="group">
+              <button type="button" class="btn btn-outline-primary">미리보기</button>
+              <button type="button" class="btn btn-outline-primary">저장</button>
+              <button type="button" class="btn btn-outline-primary">저장 후 닫기</button>
+            </div>
+          </div>
+          <ul class="nav nav-tabs">
+            <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#title">TITLE</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#component">COMPONENT</a></li>
+          </ul>
+
+          <div class="tab-content">
+            {{ form.non_field_errors }}
+            <div id="title" class="tab-pane fade show active">
+              {{form|crispy}}
+            </div>
+
+            <div id="component" class="tab-pane fade">
+              <h3>component</h3>
+
+              <div class="input-group">
+                <select class="custom-select" id="select1">
+                  <option selected>CREATE...</option>
+                  <option value="box">BOX</option>
+                  <option value="circle">CIRCLE</option>
+                  <option value="cone">CONE</option>
+                  <option value="cylinder">CYLINDER</option>
+                  <option value="dodecahedron">DODECAHEDRON</option>
+                  <option value="sphere">SPHERE</option>
+                  <option value="icosahedron">ICOSAHEDRON</option>
+                  <option value="plane">PLANE</option>
+                  <option value="sky">SKY</option>
+                </select>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">Create</button>
                 </div>
               </div>
-            <ul class="nav nav-tabs">
-              <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#title">TITLE</a></li>
-              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#component">COMPONENT</a></li>
-            </ul>
+            </div>
+          </div>
+          <script type="text/javascript">
+            function itemChange() {
+              var box = ['name', 'color', 'position', 'rotation', 'scale', 'depth', 'height', 'width', 'visible', 'shadow'];
+              var circle = ['name', 'color', 'position', 'rotation', 'scale', 'radius', 'theta_length', 'theta_start', 'visible', 'shadow'];
+              var cone = ['name', 'color', 'position', 'rotation', 'scale', 'radius_bottom', 'radius_top', 'theta_length', 'theta_start', 'height', 'visible', 'shadow'];
+              var cylinder = ['name', 'color', "position", "rotation", "scale", "radius", "theta_length", "theta_start", "height", "open_ended", "visible", "shadow"];
+              var dodecahedron = ["name", "color", 'position', 'rotation', 'scale', 'radius', 'visible', 'shadow'];
+              var sphere = ['name', 'color', 'position', 'rotation', 'scale', 'radius', 'theta_length', 'theta_start', 'visible', 'shadow'];
+              var icosahedron = ['name', 'color', 'position', 'rotation', 'scale', 'radius', 'visible', 'shadow'];
+              var plane = ['name', 'color', 'position', 'rotation', 'scale', 'height', 'width', 'visible', 'shadow'];
+              var sky = ['name', 'color', 'position', 'rotation', 'opacity', 'radius', 'theta_start', 'theta_length', 'visible', 'shadow'];
 
-            <div class="tab-content">
-              {{ form.non_field_errors }}
-              <div id="title" class="tab-pane fade in active">
-                {{form|crispy}}
-              </div>
+              var items = { 'box' : box, 'circle' : circle, 'cone' : cone, 'cylinder' : cylinder, 'dodecahedron' : dodecahedron, 'sphere' : sphere, 'icosahedron' : icosahedron, 'plane' : plane, 'sky' : sky};
 
-              <div id="component" class="tab-pane fade">
-                <h3>component</h3>
+              var selectItem = $("#select1").val();
 
-                <div class="input-group">
-                  <select class="custom-select" id="inputGroupSelect04">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Create</button>
-                  </div>
-                </div>
-              </div>
-              <!--ABOX-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ABOX
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ abox.management_form|crispy }}
-                  {% for form in abox.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_box-{{ formset.prefix }}">
+              var changeItem;
+              for (var i in items) {
+                if (selectItem == i) {
+                  changeItem = i;
+                  console.log(changeItem);
+                }
+              }
+            }
+          </script>
+          <!--ABOX-->
+          <span class="login100-form-title" style="padding : 0px">
+            ABOX
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ abox.management_form|crispy }}
+            {% for form in abox.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_box-{{ formset.prefix }}">
 
-                      {% for field in form.visible_fields %}
+              {% for field in form.visible_fields %}
 
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
 
-                  </tr>
-                  {% endfor %}
-              </table>
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--ACIRCLE-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ACIRCLE
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ acircle.management_form|crispy }}
-                  {% for form in acircle.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_circle-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--ACIRCLE-->
+          <span class="login100-form-title" style="padding : 0px">
+            ACIRCLE
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ acircle.management_form|crispy }}
+            {% for form in acircle.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_circle-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--ACONE-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ACONE
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ acone.management_form|crispy }}
-                  {% for form in acone.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_cone-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--ACONE-->
+          <span class="login100-form-title" style="padding : 0px">
+            ACONE
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ acone.management_form|crispy }}
+            {% for form in acone.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_cone-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--ACYLINDER-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ACYLINDER
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ acylinder.management_form|crispy }}
-                  {% for form in acylinder.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_cylinder-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--ACYLINDER-->
+          <span class="login100-form-title" style="padding : 0px">
+            ACYLINDER
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ acylinder.management_form|crispy }}
+            {% for form in acylinder.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_cylinder-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--ADODECAHEDRON-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ADODECAHEDRON
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ adodecahedron.management_form|crispy }}
-                  {% for form in adodecahedron.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_dodecahedron-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--ADODECAHEDRON-->
+          <span class="login100-form-title" style="padding : 0px">
+            ADODECAHEDRON
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ adodecahedron.management_form|crispy }}
+            {% for form in adodecahedron.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_dodecahedron-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--ASPHERE-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ASPHERE
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ asphere.management_form|crispy }}
-                  {% for form in asphere.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_sphere-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--ASPHERE-->
+          <span class="login100-form-title" style="padding : 0px">
+            ASPHERE
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ asphere.management_form|crispy }}
+            {% for form in asphere.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_sphere-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--AICOSAHEDRON-->
-              <span class="login100-form-title" style="padding : 0px">
-                  AICOSAHEDRON
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ aicosahedron.management_form|crispy }}
-                  {% for form in aicosahedron.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_icosahedron-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--AICOSAHEDRON-->
+          <span class="login100-form-title" style="padding : 0px">
+            AICOSAHEDRON
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ aicosahedron.management_form|crispy }}
+            {% for form in aicosahedron.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_icosahedron-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--APLANE-->
-              <span class="login100-form-title" style="padding : 0px">
-                  APLANE
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ aplane.management_form|crispy }}
-                  {% for form in aplane.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_plane-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--APLANE-->
+          <span class="login100-form-title" style="padding : 0px">
+            APLANE
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ aplane.management_form|crispy }}
+            {% for form in aplane.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_plane-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <!--ASKY-->
-              <span class="login100-form-title" style="padding : 0px">
-                  ASKY
-              </span>
-              <table class="table" style="overflow : auto;">
-                  {{ asky.management_form|crispy }}
-                  {% for form in asky.forms %}
-                  {% if forloop.first %}
-                  <tr>
-                      {% for field in form.visible_fields %}
-                      <th>{{ field.label|capfirst }}</th>
-                      {% endfor %}
-                  </tr>
-                  {% endif %}
-                  <tr class="formset_row_sky-{{ formset.prefix }}">
-                      {% for field in form.visible_fields %}
-                      <td>
-                          {# Include the hidden fields in the form #}
-                          {% if forloop.first %}
-                          {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                          {% endfor %}
-                          {% endif %}
-                          {{ field.errors.as_ul }}
-                          {{ field|as_crispy_field }}
-                      </td>
-                      {% endfor %}
-                  </tr>
-                  {% endfor %}
-              </table>
+          <!--ASKY-->
+          <span class="login100-form-title" style="padding : 0px">
+            ASKY
+          </span>
+          <table class="table" style="overflow : auto;">
+            {{ asky.management_form|crispy }}
+            {% for form in asky.forms %}
+            {% if forloop.first %}
+            <tr>
+              {% for field in form.visible_fields %}
+              <th>{{ field.label|capfirst }}</th>
+              {% endfor %}
+            </tr>
+            {% endif %}
+            <tr class="formset_row_sky-{{ formset.prefix }}">
+              {% for field in form.visible_fields %}
+              <td>
+                {# Include the hidden fields in the form #}
+                {% if forloop.first %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% endif %}
+                {{ field.errors.as_ul }}
+                {{ field|as_crispy_field }}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
 
-              <div class="container-login100-form-btn">
-                  <a href="{{Project.get_absolute_url}}">
-                      <button class="login100-form-btn">
-                          CREATE
-                      </button>
-                  </a>
-              </div>
-          </form>
-        </div>
+          <div class="container-login100-form-btn">
+            <a href="{{Project.get_absolute_url}}">
+              <button class="login100-form-btn">
+                CREATE
+              </button>
+            </a>
+          </div>
       </div>
+      </form>
     </div>
-  <!--===============================================================================================-->
-  	<script src="{% static 'users/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-  <!--===============================================================================================-->
-  	<script src="{% static 'users/vendor/bootstrap/js/popper.js' %}"></script>
-  	<script src="{% static 'users/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-  <!--===============================================================================================-->
-  	<script src="{% static 'users/vendor/select2/select2.min.js' %}"></script>
-  <!--===============================================================================================-->
-  	<script src="{% static 'users/vendor/tilt/tilt.jquery.min.js' %}"></script>
-  	<script >
-  		$('.js-tilt').tilt({
-  			scale: 1.1
-  		})
-  	</script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="{% static 'django-dynamic-formset/src/jquery.formset.js' %}"></script>
-    <script type="text/javascript">
-        $('.formset_row_box-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_circle-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_cone-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_cylinder-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_dodecahedron-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_sphere-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_icosahedron-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_plane-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-    <script type="text/javascript">
-        $('.formset_row_sky-{{ formset.prefix }}').formset({
-            addText: 'add another',
-            deleteText: 'delete',
-            prefix: '{{ formset.prefix }}'
-        });
-    </script>
-  <!--===============================================================================================-->
-  	<script src="{% static 'users/js/main.js' %}"></script>
+  </div>
+  </div>
 
-  </body>
+  <script type="text/javascript">
+    $('.formset_row_box-{{ formset.prefix }}').formset({
+      addText: 'add another',
+      deleteText: 'delete',
+      prefix: '{{ formset.prefix }}'
+    });
+  </script>
+
+</body>
+
 </html>
