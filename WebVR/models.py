@@ -24,9 +24,17 @@ class Basemodel(shadow):
     name = CharField(max_length=50)
     color = RGBColorField(default='#FF0000')
     visible = BooleanField(default=True)
-    position=CharField(max_length=20, default="0 0 -4")
-    rotation=CharField(max_length=20, default="0 0 0")
-    scale=CharField(max_length=20, default="1 1 1")
+    position_x=DecimalField(default=0, max_digits=3, decimal_places=0)
+    position_y=DecimalField(default=0, max_digits=3, decimal_places=0)
+    position_z=DecimalField(default=-4, max_digits=3, decimal_places=0)
+
+    rotation_x=DecimalField(default=0, max_digits=3, decimal_places=0)
+    rotation_y=DecimalField(default=0, max_digits=3, decimal_places=0)
+    rotation_z=DecimalField(default=0, max_digits=3, decimal_places=0)
+
+    scale_x=DecimalField(default=1, max_digits=3, decimal_places=0)
+    scale_y=DecimalField(default=1, max_digits=3, decimal_places=0)
+    scale_z=DecimalField(default=1, max_digits=3, decimal_places=0)
 
     class Meta:
         abstract=True

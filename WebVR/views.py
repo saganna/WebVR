@@ -16,11 +16,18 @@ def Home(request):
     return render(request, template, content)
 
 def CreateProject(request):
-    template='WebVR/test1.html'
+    template='WebVR/createVR.html'
     if request.method=='POST':
-        name = request.POST.get("name")
-        description = request.POST.get("description")
-    pass
+        form = ProjectForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            project = form.save()
+            project.save()
+    else :
+        form = ProjectForm()
+
+    print(form)
+    return render(request, template, {'form':form,})
 
 class ProjectListView(ListView):
     model = Project
@@ -45,68 +52,67 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name='WebVR/createVR.html'
     fields=['name', 'description']
 
-
+'''
     def get_context_data(self, **kwargs):
         data = super(ProjectCreateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            data['abox'] = AboxFormSet(self.request.POST, instance=self.object)
-            data['acircle'] = AcircleFormSet(self.request.POST, instance=self.object)
-            data['acone'] = AconeFormSet(self.request.POST, instance=self.object)
-            data['acylinder'] = AcylinderFormSet(self.request.POST, instance=self.object)
-            data['adodecahedron'] = AdodecahedronFormSet(self.request.POST, instance=self.object)
-            data['asphere'] = AsphereFormSet(self.request.POST, instance=self.object)
-            data['aicosahedron'] = AicosahedronFormSet(self.request.POST, instance=self.object)
-            data['aplane'] = AplaneFormSet(self.request.POST, instance=self.object)
-            data['asky'] = AskyFormSet(self.request.POST, instance=self.object)
+            print(AboxFormSet(self.request.POST))
+            data['abox'] = AboxFormSet(self.request.POST)
+            #data['acircle'] = AcircleFormSet(self.request.POST)
+            #data['acone'] = AconeFormSet(self.request.POST)
+            #data['acylinder'] = AcylinderFormSet(self.request.POST, instance=self.object)
+            #data['adodecahedron'] = AdodecahedronFormSet(self.request.POST)
+            #data['asphere'] = AsphereFormSet(self.request.POST)
+            #data['aicosahedron'] = AicosahedronFormSet(self.request.POST)
+            #data['aplane'] = AplaneFormSet(self.request.POST)
+            #data['asky'] = AskyFormSet(self.request.POST)
         else:
-            data['abox'] = AboxFormSet(instance=self.object)
-            data['acircle'] = AcircleFormSet(instance=self.object)
-            data['acone'] = AconeFormSet(instance=self.object)
-            data['acylinder'] = AcylinderFormSet(instance=self.object)
-            data['adodecahedron'] = AdodecahedronFormSet(instance=self.object)
-            data['asphere'] = AsphereFormSet(instance=self.object)
-            data['aicosahedron'] = AicosahedronFormSet(instance=self.object)
-            data['aplane'] = AplaneFormSet(instance=self.object)
-            data['asky'] = AskyFormSet(instance=self.object)
+            data['abox'] = AboxFormSet()
+            #data['acircle'] = AcircleFormSet()
+            #data['acone'] = AconeFormSet()
+            #data['acylinder'] = AcylinderFormSet()
+            #data['adodecahedron'] = AdodecahedronFormSet()
+            #data['asphere'] = AsphereFormSet()
+            #data['aicosahedron'] = AicosahedronFormSet()
+            #data['aplane'] = AplaneFormSet()
+            #data['asky'] = AskyFormSet()
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
 
         abox = context['abox']
-        acircle = context['acircle']
-        acone = context['acone']
-        acylinder = context['acylinder']
-        adodecahedron = context['adodecahedron']
-        asphere = context['asphere']
-        aicosahedron = context['aicosahedron']
-        aplane = context['aplane']
-        asky = context['asky']
+        #acircle = context['acircle']
+        #acone = context['acone']
+        #acylinder = context['acylinder']
+        #adodecahedron = context['adodecahedron']
+        #asphere = context['asphere']
+        #aicosahedron = context['aicosahedron']
+        #aplane = context['aplane']
+        #asky = context['asky']
         with transaction.atomic():
             form.instance.creator = self.request.user
             self.object = form.save()
-            if abox.is_valid() and acircle.is_valid() and acone.is_valid() and acylinder.is_valid() and adodecahedron.is_valid() and asphere.is_valid() and aicosahedron.is_valid() and aplane.is_valid() and asky.is_valid():
-                print(context)
+            if abox.is_valid():# and acircle.is_valid() and acone.is_valid() and acylinder.is_valid() and adodecahedron.is_valid() and asphere.is_valid() and aicosahedron.is_valid() and aplane.is_valid() and asky.is_valid():
                 abox.instance = self.object
-                abox.save()
-                acircle.instance = self.object
-                acircle.save()
-                acone.instance = self.object
-                acone.save()
-                acylinder.instance = self.object
-                acylinder.save()
-                adodecahedron.instance = self.object
-                adodecahedron.save()
-                asphere.instance = self.object
-                asphere.save()
-                aicosahedron.instance = self.object
-                aicosahedron.save()
-                aplane.instance = self.object
-                aplane.save()
-                asky.instance = self.object
-                asky.save()
+                #acircle.instance = self.object
+                #acircle.save()
+                #acone.instance = self.object
+                #acone.save()
+                #acylinder.instance = self.object
+                #acylinder.save()
+                #adodecahedron.instance = self.object
+                #adodecahedron.save()
+                #asphere.instance = self.object
+                #asphere.save()
+                #aicosahedron.instance = self.object
+                #aicosahedron.save()
+                #aplane.instance = self.object
+                #aplane.save()
+                #asky.instance = self.object
+                #asky.save()
         return super(ProjectCreateView, self).form_valid(form)
-
+'''
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
     template_name='WebVR/updateVR.html'
@@ -201,9 +207,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
-        temp['scale']=t.scale
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
+        #temp['scale']=t.scale
         temp['depth']=t.depth
         temp['height']=t.height
         temp['width']=t.width
@@ -220,10 +226,10 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
         temp['radius']=t.radius
-        temp['scale']=t.scale
+        #temp['scale']=t.scale
         temp['height']=t.height
         temp['width']=t.width
         temp['theta_length']=t.theta_length
@@ -240,9 +246,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
-        temp['scale']=t.scale
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
+        #temp['scale']=t.scale
         temp['height']=t.height
         temp['width']=t.width
         temp['theta_length']=t.theta_length
@@ -261,9 +267,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
-        temp['scale']=t.scale
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
+        #temp['scale']=t.scale
         temp['height']=t.height
         temp['width']=t.width
         temp['theta_length']=t.theta_length
@@ -282,9 +288,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
-        temp['scale']=t.scale
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
+        #temp['scale']=t.scale
         temp['radius']=t.radius
         temp['shadow']="cast : {} receive : {}".format(t.cast, t.receive)
         adodecahedron.append(temp)
@@ -298,9 +304,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
-        temp['scale']=t.scale
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
+        #temp['scale']=t.scale
         temp['height']=t.height
         temp['width']=t.width
         temp['theta_length']=t.theta_length
@@ -318,9 +324,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        temp['position']=t.position
-        temp['rotation']=t.rotation
-        temp['scale']=t.scale
+        #temp['position']=t.position
+        #temp['rotation']=t.rotation
+        #temp['scale']=t.scale
         temp['height']=t.height
         temp['width']=t.width
         temp['radius']=t.radius
