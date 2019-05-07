@@ -58,7 +58,7 @@
   <section class="bg-primary text-white mb-0" id="about">
     <div class="container" style="padding : 50px 15px 20px 15px">
       {% for project in projects %}
-      <h2 class="text-center text-uppercase text-white">{{project.name}}</h2>
+      <h2 class="text-center text-uppercase text-white"><a herf="/projects/{{project.id}}">{{project.name}}</a></h2>
       <hr class="star-light mb-5">
       <div class="row">
         <div class="col-lg-4 ml-auto">
@@ -79,8 +79,8 @@
       </div>
       {% if project.creator == user %}
       <div class='text-center'>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'updateVR' project.pk %}">Update</a>
-        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'deleteVR' project.pk %}">Delete</a>
+        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="/admin/WebVR/project/{{project.id}}/change/">Update</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="/admin/WebVR/project/{{project.id}}/delete/">Delete</a>
       </div>
       {% endif %}
       {% endfor %}
@@ -109,7 +109,7 @@
       {% endif %}
       </div>
       <div class="text-center mt-4">
-        <a class="btn btn-xl btn-outline-light" href="{% url 'createVR' %}">
+        <a class="btn btn-xl btn-outline-light" href="/admin/WebVR/project/add/">
           Create WebVR
         </a>
       </div>

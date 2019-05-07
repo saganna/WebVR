@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from .models import *
 
+admin.site.site_header = "WebVR"
+
 # Register your models here.
 class AboxInLine(admin.TabularInline):
     model = a_box
@@ -36,6 +38,9 @@ class AskyInLine(admin.TabularInline):
 
 
 class ProjectAdmin(admin.ModelAdmin):
+
+    list_display=("name", "creator")
+
     inlines = [
         AboxInLine,
         AcircleInLine,

@@ -52,11 +52,11 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name='WebVR/createVR.html'
     fields=['name', 'description']
 
-'''
+
     def get_context_data(self, **kwargs):
         data = super(ProjectCreateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            print(AboxFormSet(self.request.POST))
+            print(self.request.POST)
             data['abox'] = AboxFormSet(self.request.POST)
             #data['acircle'] = AcircleFormSet(self.request.POST)
             #data['acone'] = AconeFormSet(self.request.POST)
@@ -112,7 +112,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
                 #asky.instance = self.object
                 #asky.save()
         return super(ProjectCreateView, self).form_valid(form)
-'''
+
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
     template_name='WebVR/updateVR.html'
@@ -198,7 +198,7 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def showproject_view(request, pk):
     obj = Project.objects.get(id=pk)
     context={}
-
+    print(pk)
     #adding abox
     abox=[]
     for i in range(obj.a_box_set.count()):
@@ -207,8 +207,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         #temp['scale']=t.scale
         temp['depth']=t.depth
         temp['height']=t.height
@@ -226,12 +227,10 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
         temp['radius']=t.radius
-        #temp['scale']=t.scale
-        temp['height']=t.height
-        temp['width']=t.width
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         temp['theta_length']=t.theta_length
         temp['theta_start']=t.theta_start
         temp['shadow']="cast : {} receive : {}".format(t.cast, t.receive)
@@ -246,11 +245,10 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
-        #temp['scale']=t.scale
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         temp['height']=t.height
-        temp['width']=t.width
         temp['theta_length']=t.theta_length
         temp['theta_start']=t.theta_start
         temp['radius_bottom']=t.radius_bottom
@@ -267,11 +265,10 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
-        #temp['scale']=t.scale
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         temp['height']=t.height
-        temp['width']=t.width
         temp['theta_length']=t.theta_length
         temp['theta_start']=t.theta_start
         temp['radius']=t.radius
@@ -288,9 +285,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
-        #temp['scale']=t.scale
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         temp['radius']=t.radius
         temp['shadow']="cast : {} receive : {}".format(t.cast, t.receive)
         adodecahedron.append(temp)
@@ -304,11 +301,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
-        #temp['scale']=t.scale
-        temp['height']=t.height
-        temp['width']=t.width
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         temp['theta_length']=t.theta_length
         temp['theta_start']=t.theta_start
         temp['radius']=t.radius
@@ -324,11 +319,9 @@ def showproject_view(request, pk):
         temp['name']=t.name
         temp['color']=t.color
         temp['visible']=t.visible
-        #temp['position']=t.position
-        #temp['rotation']=t.rotation
-        #temp['scale']=t.scale
-        temp['height']=t.height
-        temp['width']=t.width
+        temp['position']="{} {} {}".format(t.position_x, t.position_y, t.position_z)
+        temp['rotation']="{} {} {}".format(t.rotation_x, t.rotation_y, t.rotation_z)
+        temp['scale']="{} {} {}".format(t.scale_x, t.scale_y, t.scale_z)
         temp['radius']=t.radius
         temp['shadow']="cast : {} receive : {}".format(t.cast, t.receive)
         aicosahedron.append(temp)

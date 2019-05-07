@@ -1,0 +1,234 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+<style>
+  /* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  animation: fadeEffect 1s;
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+@keyframes fadeEffect{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.stuck {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    transform: translateY(100%);
+    width: 260px;
+    height: 145px;
+    animation: fade-in-up .25s ease forwards;
+    z-index: 999;
+}
+</style>
+{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-form{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; {% if has_view_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+&rsaquo; {% if add %}{% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}<div id="content-main">
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+      {% change_form_object_tools %}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
+<div>
+{% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1">{% endif %}
+{% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}">{% endif %}
+{% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
+{% if errors %}
+    <p class="errornote">
+    {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+    </p>
+    {{ adminform.form.non_field_errors }}
+{% endif %}
+
+
+
+<iframe src="http://127.0.0.1:8000/projects/46/" width="600" height="300"></iframe>
+
+
+<div class="tab">
+  <button type="button" class="tablinks" id="titlelink">TITLE</button>
+  <button type="button" class="tablinks" id="contentlink">CONTENT</button>
+</div>
+
+<div id="title" class="tabcontent">
+  {% block field_sets %}
+  {% for fieldset in adminform %}
+    {% include "admin/includes/fieldset.html" %}
+  {% endfor %}
+  {% endblock %}
+  {% block after_field_sets %}{% endblock %}
+</div>
+
+<div id="as" class="tabcontent">
+  {% block inline_field_sets %}
+  {% for inline_admin_formset in inline_admin_formsets %}
+      {% include inline_admin_formset.opts.template %}
+  {% endfor %}
+  {% endblock %}
+</div>
+
+{% block after_related_objects %}{% endblock %}
+
+{% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
+
+{% block admin_change_form_document_ready %}
+
+    <script type="text/javascript"
+            id="django-admin-form-add-constants"
+            src="{% static 'admin/js/change_form.js' %}"
+            {% if adminform and add %}
+                data-model-name="{{ opts.model_name }}"
+            {% endif %}>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $("#titlelink")[0].addEventListener("click", function(){
+          var i, tabcontent, tablinks;
+
+          tabcontent = $(".tabcontent");
+          for(i=0;i<tabcontent.length;i++){
+            tabcontent[i].style.display = "none";
+          }
+
+          tablinks = $(".tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          document.getElementById("title").style.display = "block";
+          document.getElementById("titlelink").className+=" active";
+
+        });
+
+        $("#contentlink")[0].addEventListener("click", function(){
+          var i, tabcontent, tablinks;
+
+          tabcontent = $(".tabcontent");
+          for(i=0;i<tabcontent.length;i++){
+            tabcontent[i].style.display = "none";
+          }
+
+          tablinks = $(".tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          document.getElementById("as").style.display = "block";
+          document.getElementById("contentlink").className+=" active";
+
+        });
+
+    </script>
+
+    <script type="text/javascript">
+      /*Floating Code for Iframe Start*/
+        if (jQuery('iframe').length > 0) {
+          /*Wrap (all code inside div) all vedio code inside div*/
+          jQuery('iframe').wrap("<div class='iframe-parent-class'></div>");
+          /*main code of each (particular) vedio*/
+          jQuery('iframe').each(function(index) {
+
+            /*Floating js Start*/
+            var windows = jQuery(window);
+            var iframeWrap = jQuery(this).parent();
+            var iframe = jQuery(this);
+            var iframeHeight = iframe.outerHeight();
+            var iframeElement = iframe.get(0);
+            windows.on('scroll', function() {
+              var windowScrollTop = windows.scrollTop();
+              var iframeBottom = iframeHeight + iframeWrap.offset().top;
+              //alert(iframeBottom);
+
+              if ((windowScrollTop > iframeBottom)) {
+                  iframeWrap.height(iframeHeight);
+                  iframe.addClass('stuck');
+                  jQuery(".scrolldown").css({"display": "none"});
+              } else {
+                  iframeWrap.height('auto');
+                  iframe.removeClass('stuck');
+              }
+            });
+            /*Floating js End*/
+          });
+        }
+
+        /*Floating Code for Iframe End*/
+    </script>
+{% endblock %}
+
+{# JavaScript for prepopulated fields #}
+{% prepopulated_fields_js %}
+
+</div>
+</form></div>
+{% endblock %}
