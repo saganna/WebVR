@@ -68,7 +68,12 @@
         scale="{{cylinder.scale}}"
         height="{{cylinder.height}}"
         shadow="{{cylinder.shadow}}"
-        open-ended="{{cylinder.open_ended}}"
+        radius="{{cylinder.radius}}"
+        {% if cylinder.open_ended %}
+        open-ended="true"
+        {% else %}
+        open-ended="false"
+        {% endif %}
         theta-length="{{cylinder.theta_length}}"
         theta-start="{{cylinder.theta_start}}"
       ></a-cylinder>

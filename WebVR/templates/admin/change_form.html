@@ -64,8 +64,8 @@
     bottom: 100px;
     right: 20px;
     transform: translateY(100%);
-    width: 260px;
-    height: 145px;
+    width: 400px;
+    height: 245px;
     animation: fade-in-up .25s ease forwards;
     z-index: 999;
 }
@@ -111,7 +111,7 @@
 
 
 
-<iframe src="http://127.0.0.1:8000/projects/46/" width="600" height="300"></iframe>
+<iframe src="/projects/{{project.pk}}/" width="1000" height="500"></iframe>
 
 
 <div class="tab">
@@ -134,10 +134,11 @@
       {% include inline_admin_formset.opts.template %}
   {% endfor %}
   {% endblock %}
-</div>
+
+
 
 {% block after_related_objects %}{% endblock %}
-
+</div>
 {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
 
 {% block admin_change_form_document_ready %}
@@ -223,6 +224,18 @@
         }
 
         /*Floating Code for Iframe End*/
+    </script>
+
+    <script type="text/javascript">
+      var ifrm=window.location.href.split(window.location.pathname)[0]+"/projects/"+window.location.href.split("project/")[1].split("/change/")[0]+'/';
+      if(window.location.href.split("project/")[1].split("/change/")[0]=='add/'){
+        $("iframe").remove();
+        $("input[name*='_save']").attr("formaction", "/projects/");
+      }
+      else{
+        $("iframe").attr("src", ifrm);
+        $("input[name*='_save']").attr("formaction", ifrm);
+      }
     </script>
 {% endblock %}
 

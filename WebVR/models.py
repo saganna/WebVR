@@ -24,17 +24,17 @@ class Basemodel(shadow):
     name = CharField(max_length=50)
     color = RGBColorField(default='#FF0000')
     visible = BooleanField(default=True)
-    position_x=DecimalField(default=0, max_digits=3, decimal_places=0)
-    position_y=DecimalField(default=0, max_digits=3, decimal_places=0)
-    position_z=DecimalField(default=-4, max_digits=3, decimal_places=0)
+    position_x=DecimalField(default=0, max_digits=4, decimal_places=1)
+    position_y=DecimalField(default=0, max_digits=4, decimal_places=1)
+    position_z=DecimalField(default=-4, max_digits=4, decimal_places=1)
 
-    rotation_x=DecimalField(default=0, max_digits=3, decimal_places=0)
-    rotation_y=DecimalField(default=0, max_digits=3, decimal_places=0)
-    rotation_z=DecimalField(default=0, max_digits=3, decimal_places=0)
+    rotation_x=DecimalField(default=0, max_digits=4, decimal_places=1)
+    rotation_y=DecimalField(default=0, max_digits=4, decimal_places=1)
+    rotation_z=DecimalField(default=0, max_digits=4, decimal_places=1)
 
-    scale_x=DecimalField(default=1, max_digits=3, decimal_places=0)
-    scale_y=DecimalField(default=1, max_digits=3, decimal_places=0)
-    scale_z=DecimalField(default=1, max_digits=3, decimal_places=0)
+    scale_x=DecimalField(default=1, max_digits=4, decimal_places=1)
+    scale_y=DecimalField(default=1, max_digits=4, decimal_places=1)
+    scale_z=DecimalField(default=1, max_digits=4, decimal_places=1)
 
     class Meta:
         abstract=True

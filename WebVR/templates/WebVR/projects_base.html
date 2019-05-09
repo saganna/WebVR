@@ -58,7 +58,7 @@
   <section class="bg-primary text-white mb-0" id="about">
     <div class="container" style="padding : 50px 15px 20px 15px">
       {% for project in projects %}
-      <h2 class="text-center text-uppercase text-white"><a herf="/projects/{{project.id}}">{{project.name}}</a></h2>
+      <a href="/projects/{{project.id}}/"><h2 class="text-center text-uppercase text-white">{{project.name}}</h2></a>
       <hr class="star-light mb-5">
       <div class="row">
         <div class="col-lg-4 ml-auto">
