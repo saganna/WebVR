@@ -1,0 +1,28 @@
+{% extends 'doctors/index.html' %} 
+{% block content %}
+{% load crispy_forms_tags %}
+<legend style="margin: 10px; padding: 5px; color: black">
+  Create Appointment
+  <a href="{% url 'appointments' %}">
+    <button type="submit" class="btn btn-success" style="float: right">
+      <i class="fas fa-list"> Appointments List </i>
+    </button></a
+  >
+</legend>
+<hr />
+<form method="POST" style="margin: 10px; padding: 5px">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12">{{ form.client|as_crispy_field}}</div>
+    <div class="col-12">{{ form.doctor|as_crispy_field }}</div>
+  </div>
+  <div class="row">
+    <div class="col-12">{{ form.comment|as_crispy_field }}</div>
+  
+  </div>
+  <button type="submit" class="btn btn-success" style="float: right">
+    Post
+  </button>
+</form>
+<br />
+{% endblock %}

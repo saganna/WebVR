@@ -25,7 +25,7 @@ SECRET_KEY = 'b=huv60oet80vtoia1+3&esg&6&t7$d0qy1t8+c02d@tuvj6+@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = '*'
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'WebVR',
-    'django_mysql',
+    'doctors',
     'users.apps.UsersConfig',
     'basic',
     'crispy_forms',
@@ -58,12 +58,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'SeeWhy.urls'
 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, "WebVR/templates")
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,18 +81,10 @@ WSGI_APPLICATION = 'SeeWhy.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "WebVR",
-        'OPTIONS':{
-            'charset':'utf8mb4',
-        },
-        'USER' : 'root',
-        'PASSWORD' : 'hero6724',
-        'HOST' : 'localhost',
-        'PORT' : '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR ,'db.sqlite3'),
     }
 }
 
@@ -147,5 +139,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = 'kiharajoseph72@gmail.com'
+EMAIL_HOST_PASSWORD = 'babuuh12'

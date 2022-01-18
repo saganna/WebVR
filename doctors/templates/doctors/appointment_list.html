@@ -1,0 +1,55 @@
+{% extends 'doctors/index.html' %}
+{% load static %}
+
+{% block content %}
+<legend style="margin: 10px; padding: 5px; color: black;">Appointments List
+  <a href="{% url 'add_appointment' %}">
+  <button type="submit" class="btn btn-success" style="float: right;">
+    <i class="fas fa-plus"> Add Invoice</i>
+</button></a>
+</legend>
+<form method="get">
+  {{ myFilter.form }}
+  <button class="btn btn-dark rounded" type="submit">Search</button>
+</form><br>
+<table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Appointment No</th>
+        <th scope="col">Date</th>
+        <th scope="col">Client</th>
+        <th scope="col">Comments</th>
+        
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for appointment in page_obj %}
+      <tr>
+       
+        <th scope="row"1></th>
+        <td>{{appointment.appointment_id}}</td>
+        <td>{{appointment.date_of_appointment}}</td>
+        <td>{{appointment.client}}</td>
+        <td>{{appointment.comment}}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+   
+  </table>
+  <div class="text-center container mt-5">
+    {% if page_obj.has_previous %}
+      <a class="poppins-font p-2" href="?page={{page_obj.previous_page_number}}">previous</a>
+    {% endif %}
+
+    <a class="p-2 active-btn poppins-font text-dark" style="background-color:lightgreen;">{{page_obj.number}}</a>
+    
+    {% if page_obj.has_next %}
+      <a class="p-2 poppins-font" href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+
+  </div>
+{% endblock content%}
